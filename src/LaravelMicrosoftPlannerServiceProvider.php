@@ -17,9 +17,6 @@ class LaravelMicrosoftPlannerServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-microsoft-planner')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-microsoft-planner_table')
-            ->hasCommand(LaravelMicrosoftPlannerCommand::class);
+            ->hasConfigFile();
     }
 }
