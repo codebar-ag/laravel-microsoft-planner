@@ -24,7 +24,10 @@ class TaskDetails extends Data
             previewType: Arr::get($data, 'previewType'),
             id: Arr::get($data, 'id'),
             notes: Note::fromData(Arr::get($data, 'notes')),
-            references: Arr::get($data, 'references'),
+            references: collect(Arr::get($data, 'references', []))
+                ->map(function (array $referenceItem, string $key) {
+                    return Reference::fromData($key, $referenceItem);
+                })->flatten()->toArray(),
             completionRequirements: Arr::get($data, 'completionRequirements'),
             checklist: collect(Arr::get($data, 'checklist', []))
                 ->mapWithKeys(function (array $checklistItem, string $key) {

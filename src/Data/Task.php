@@ -2,6 +2,7 @@
 
 namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Saloon\Http\Response;
 use Spatie\LaravelData\Data;
@@ -15,15 +16,15 @@ class Task extends Data
         public string $orderHint,
         public string $assigneePriority,
         public int $percentComplete,
-        public null|string $startDateTime,
-        public string $createdDateTime,
-        public null|string $dueDateTime,
+        public null|Carbon $startDateTime,
+        public Carbon $createdDateTime,
+        public null|Carbon $dueDateTime,
         public null|string $recurrence,
         public bool $hasDescription,
         public string $specifiedCompletionRequirements,
         public string $previewType,
-        public null|string $completedDateTime,
-        public null|string $completedBy,
+        public null|Carbon $completedDateTime,
+        public null|Carbon $completedBy,
         public int $referenceCount,
         public int $checklistItemCount,
         public int $activeChecklistItemCount,
@@ -45,14 +46,14 @@ class Task extends Data
             orderHint: Arr::get($data, 'orderHint'),
             assigneePriority: Arr::get($data, 'assigneePriority'),
             percentComplete: Arr::get($data, 'percentComplete'),
-            startDateTime: Arr::get($data, 'startDateTime'),
-            createdDateTime: Arr::get($data, 'createdDateTime'),
-            dueDateTime: Arr::get($data, 'dueDateTime'),
+            startDateTime: Carbon::createFromTimestamp(Arr::get($data, 'startDateTime')),
+            createdDateTime: Carbon::createFromTimestamp(Arr::get($data, 'createdDateTime')),
+            dueDateTime: Carbon::createFromTimestamp(Arr::get($data, 'dueDateTime')),
             recurrence: Arr::get($data, 'recurrence'),
             hasDescription: Arr::get($data, 'hasDescription'),
             specifiedCompletionRequirements: Arr::get($data, 'specifiedCompletionRequirements'),
             previewType: Arr::get($data, 'previewType'),
-            completedDateTime: Arr::get($data, 'completedDateTime'),
+            completedDateTime: Carbon::createFromTimestamp(Arr::get($data, 'completedDateTime')),
             completedBy: Arr::get($data, 'completedBy'),
             referenceCount: Arr::get($data, 'referenceCount'),
             checklistItemCount: Arr::get($data, 'checklistItemCount'),
