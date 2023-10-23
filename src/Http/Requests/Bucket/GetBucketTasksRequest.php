@@ -8,7 +8,7 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-class ListBucketTasksRequest extends Request
+class GetBucketTasksRequest extends Request
 {
     protected Method $method = Method::GET;
 
@@ -27,6 +27,6 @@ class ListBucketTasksRequest extends Request
             return null;
         }
 
-        return collect(Arr::get($response->json(), 'value'))->map(fn (array $task) => Task::fromData($task));
+        return collect(Arr::get($response->json(), 'value'))->map(fn (array $task) => Task::fromData($task))->sortBy(['priority']);
     }
 }

@@ -28,7 +28,6 @@ class GetTaskDetailsRequest extends Request
             return null;
         }
 
-
         return TaskDetails::fromData($response->json());
     }
 }

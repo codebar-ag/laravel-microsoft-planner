@@ -8,6 +8,7 @@ use Spatie\LaravelData\Data;
 class TaskDetails extends Data
 {
     public function __construct(
+        public string $eTag,
         public string $description,
         public string $previewType,
         public string $id,
@@ -20,6 +21,7 @@ class TaskDetails extends Data
     public static function fromData(array $data): self
     {
         return new static(
+            eTag: Arr::get($data, '@odata.etag'),
             description: Arr::get($data, 'description'),
             previewType: Arr::get($data, 'previewType'),
             id: Arr::get($data, 'id'),
@@ -27,12 +29,12 @@ class TaskDetails extends Data
             references: collect(Arr::get($data, 'references', []))
                 ->map(function (array $referenceItem, string $key) {
                     return Reference::fromData($key, $referenceItem);
-                })->flatten()->toArray(),
+                })->flatten()->reverse()->toArray(),
             completionRequirements: Arr::get($data, 'completionRequirements'),
             checklist: collect(Arr::get($data, 'checklist', []))
                 ->mapWithKeys(function (array $checklistItem, string $key) {
                     return [$key => Checklist::fromData($key, $checklistItem)];
-                })->flatten()->toArray(),
+                })->flatten()->sortByDesc('orderHint')->toArray(),
             );
     }
 }
