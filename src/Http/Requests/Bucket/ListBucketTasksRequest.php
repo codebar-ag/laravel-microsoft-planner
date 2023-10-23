@@ -2,6 +2,8 @@
 
 namespace CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Bucket;
 
+use CodebarAg\LaravelMicrosoftPlanner\Data\Task;
+use Illuminate\Support\Arr;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -16,11 +18,15 @@ class ListBucketTasksRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return 'planner/buckets/09AEzJXp0E6zY5LEE2Wsv5cAOdQd/tasks';
+        return 'planner/buckets/' . $this->bucketId . '/tasks';
     }
 
     public function createDtoFromResponse(Response $response): mixed
     {
-        return $response->json();
+        if (! $response->successful()) {
+            return null;
+        }
+
+        return collect(Arr::get($response->json(), 'value'))->map(fn (array $task) => Task::fromData($task));
     }
 }
