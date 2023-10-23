@@ -3,7 +3,9 @@
 namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 
 class TaskDetails extends Data
 {
@@ -13,28 +15,31 @@ class TaskDetails extends Data
         public string $previewType,
         public string $id,
         public Note $notes,
-        public array $references,
-        public array $completionRequirements,
-        public array $checklist,
-    ) {}
+        public Collection $references,
+        public Collection $checklist,
+    ) {
+    }
 
     public static function fromData(array $data): self
     {
+        $checklist = collect(Arr::get($data, 'checklist', []))
+            ->map(function (array $checklistItem, string $key) {
+                return Checklist::fromData($key, $checklistItem);
+            })->flatten()->sortByDesc('orderHint');
+
+        $references = collect(Arr::get($data, 'references', []))
+            ->map(function (array $referenceItem, string $key) {
+                return Reference::fromData($key, $referenceItem);
+            })->flatten()->reverse();
+
         return new static(
             eTag: Arr::get($data, '@odata.etag'),
             description: Arr::get($data, 'description'),
             previewType: Arr::get($data, 'previewType'),
             id: Arr::get($data, 'id'),
             notes: Note::fromData(Arr::get($data, 'notes')),
-            references: collect(Arr::get($data, 'references', []))
-                ->map(function (array $referenceItem, string $key) {
-                    return Reference::fromData($key, $referenceItem);
-                })->flatten()->reverse()->toArray(),
-            completionRequirements: Arr::get($data, 'completionRequirements'),
-            checklist: collect(Arr::get($data, 'checklist', []))
-                ->mapWithKeys(function (array $checklistItem, string $key) {
-                    return [$key => Checklist::fromData($key, $checklistItem)];
-                })->flatten()->sortByDesc('orderHint')->toArray(),
-            );
+            references: $references,
+            checklist: $checklist
+        );
     }
 }
