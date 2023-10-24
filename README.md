@@ -1,21 +1,25 @@
-# This is my package laravel-microsoft-planner
+<img src="https://banners.beyondco.de/Laravel%20Microsoft%20Planner.png?theme=light&packageManager=composer+require&packageName=codebar-ag%2Flaravel-microsoft-planner&pattern=circuitBoard&style=style_1&description=An+opinionated+way+to+interface+with+Microsoft+Planner&md=1&showWatermark=0&fontSize=175px&images=document-report">
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codebar-ag/laravel-microsoft-planner.svg?style=flat-square)](https://packagist.org/packages/codebar-ag/laravel-microsoft-planner)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/codebar-ag/laravel-microsoft-planner/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/codebar-ag/laravel-microsoft-planner/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/codebar-ag/laravel-microsoft-planner/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/codebar-ag/laravel-microsoft-planner/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub-Tests](https://github.com/codebar-ag/laravel-microsoft-planner/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/codebar-ag/laravel-microsoft-planner/actions/workflows/run-tests.yml)
+[![GitHub Code Style](https://github.com/codebar-ag/laravel-microsoft-planner/actions/workflows/fix-php-code-style-issues.yml/badge.svg?branch=main)](https://github.com/codebar-ag/laravel-microsoft-planner/actions/workflows/fix-php-code-style-issues.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/codebar-ag/laravel-microsoft-planner.svg?style=flat-square)](https://packagist.org/packages/codebar-ag/laravel-microsoft-planner)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package was developed to interface with Microsoft Planner.
 
-## Support us
+## 💡 What is Laravel Microsoft Planner?
+/
+Laravel Microsoft Planner is an opinionated way to interface with Microsoft Planner.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-microsoft-planner.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-microsoft-planner)
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+## 🛠 Requirements
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+### <= v1.0
 
-## Installation
+- PHP: `^8.2`
+- Laravel: `^10.*`
+
+## ⚙️ Installation
 
 You can install the package via composer:
 
@@ -23,62 +27,73 @@ You can install the package via composer:
 composer require codebar-ag/laravel-microsoft-planner
 ```
 
-You can publish and run the migrations with:
+Add the following environment variables to your `.env` file:
 
 ```bash
-php artisan vendor:publish --tag="laravel-microsoft-planner-migrations"
-php artisan migrate
+MICROSOFT_PLANNER_CLIENT_ID=your-client-id
+MICROSOFT_PLANNER_TENANT_ID=your-tenant-id
+MICROSOFT_PLANNER_CLIENT_SECRET=your-client-secret
 ```
+
+
+## 🔧 Configuration file
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-microsoft-planner-config"
+php artisan vendor:publish --tag=microsoft-planner-config
 ```
 
 This is the contents of the published config file:
 
 ```php
+<?php
+
+// config for CodebarAg/LaravelMicrosoftPlanner
+
 return [
+    'auth' => [
+        'client_id' => env('MICROSOFT_PLANNER_CLIENT_ID'),
+        'client_secret' => env('MICROSOFT_PLANNER_CLIENT_SECRET'),
+        'tenant_id' => env('MICROSOFT_PLANNER_TENANT_ID'),
+        'redirect_uri' => env('MICROSOFT_PLANNER_REDIRECT_URI'),
+    ]
 ];
 ```
 
-Optionally, you can publish the views using
+## 🚧 Testing
+
+Copy your own phpunit.xml-file.
 
 ```bash
-php artisan vendor:publish --tag="laravel-microsoft-planner-views"
+cp phpunit.xml.dist phpunit.xml
 ```
 
-## Usage
-
-```php
-$laravelMicrosoftPlanner = new CodebarAg\LaravelMicrosoftPlanner();
-echo $laravelMicrosoftPlanner->echoPhrase('Hello, CodebarAg!');
-```
-
-## Testing
+Run the tests:
 
 ```bash
-composer test
+./vendor/bin/pest
 ```
 
-## Changelog
+## 📝 Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
+## ✏️ Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
-## Security Vulnerabilities
+## 🧑‍💻 Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Please review [our security policy](.github/SECURITY.md) on how to report security vulnerabilities.
 
-## Credits
+## 🙏 Credits
 
-- [Rhys Lees](https://github.com/codebar-ag)
+- [Rhys Lees](https://github.com/RhysLees)
 - [All Contributors](../../contributors)
+- [Skeleton Repository from Spatie](https://github.com/spatie/package-skeleton-laravel)
+- [Laravel Package Training from Spatie](https://spatie.be/videos/laravel-package-training)
 
-## License
+## 🎭 License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
