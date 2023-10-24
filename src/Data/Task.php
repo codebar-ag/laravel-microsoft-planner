@@ -36,8 +36,7 @@ class Task extends Data
         public array $createdBy,
         public array $appliedCategories,
         public array $assignments,
-    ) {
-    }
+    ) {}
 
     public static function fromData(array $data): self
     {

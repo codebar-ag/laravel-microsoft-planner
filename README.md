@@ -61,6 +61,121 @@ return [
 ];
 ```
 
+## 🏗 Usage
+
+```php
+use CodebarAg\LaravelMicrosoftPlanner\Http\Connectors\MicrosoftPlannerConnector;
+use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Bucket\GetBucketTasksRequest;
+use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks\GetTaskRequest;
+use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks\GetTaskDetailsRequest;
+use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks\PatchTaskRequest;
+use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks\PatchTaskDetialsRequest;
+
+$connector = new MicrosoftPlannerConnector();
+$authenticator = $connector->getAccessToken();
+$connector->authenticate($authenticator);
+
+
+// Get all tasks from a bucket
+$tasksResponse = $connector->send(new GetBucketTasksRequest(bucketId: 'bucket-id'));
+$tasks = $tasksResponse->dto();
+
+
+// Get a single task
+$taskResponse = $connector->send(new GetTaskRequest(taskId: 'task-id'));
+$task = $taskResponse->dto();
+
+// Get a tasks details
+$taskDetailsResponse = $connector->send(new GetTaskDetailsRequest(taskId: 'task-id'));
+$taskDetails = $taskDetailsResponse->dto();
+
+// Update a task
+$updateTaskRequest = new PatchTaskRequest(taskId: 'task-id', etag: $task->eTag);
+$updateTaskRequest->body()->add('somedetail', 'somevalue');
+
+$updateTaskResponse = $connector->send($updateTaskRequest);
+
+if ($updatedTask->successful()) {
+    // Do something
+}
+
+// Update a tasks details
+$updateTaskDetailsRequest = new PatchTaskDetialsRequest(taskId: 'task-id', etag: $taskDetails->eTag);
+$updateTaskDetailsRequest->body()->add('somedetail', 'somevalue');
+
+$updateTaskDetailsResponse = $connector->send($updateTaskDetailsRequest);
+
+if ($updatedTaskDetails->successful()) {
+    // Do something
+}
+```
+
+## 🏋️ DTO showcase
+
+```php
+CodebarAg\LaravelMicrosoftPlanner\Data\Checklist {
+    +id: "2f071481-095d-4363-abd9-29ef845a8b05"                     // string
+    +isChecked: true,                                               // bool
+    +title: "sometask"                                              // string
+    +orderHint: "858",                                              // string
+    +lastModifiedDateTime: "2021-08-31T13:00:00Z"                   // string
+    +lastModifiedByUserId: "1234456"                                // string|null
+}
+
+CodebarAg\LaravelMicrosoftPlanner\Data\Note {
+    +contentType: 'html'                                            // string
+    +content: '<p>Some content</p>'                                 // string
+}
+
+CodebarAg\LaravelMicrosoftPlanner\Data\Reference {
+    +alias: "test.pdf"                                              // string
+    +url: "https://something.here/in-this-file/test.pdf"            // string
+    +type: "pdf"                                                    // string
+    +previewPriority: "858"                                         // string
+    +lastModifiedDateTime: "2021-08-31T13:00:00Z"                   // string
+    +lastModifiedByUserId: "1234456"                                // string
+}
+
+CodebarAg\LaravelMicrosoftPlanner\Data\TaskDetails {
+    +eTag: "W/"1238934jbdf89bfdkkjbr34g98hh98vhhcc=""               // string
+    +description: "Some Description"                                // string
+    +previewType: "noPreview"                                       // string
+    +id: "EZAPnP4uBkGAMqyd2dneWJcAOGbk"                             // string
+    +notes: CodebarAg\LaravelMicrosoftPlanner\Data\Note             // Note
+    +references: Illuminate\Support\Collection                      // Collection
+    +checklist: Illuminate\Support\Collection                       // Collection
+}
+
+CodebarAg\LaravelMicrosoftPlanner\Data\Task {
+    +eTag: "W/"JzEtVGFzsdfsdEBAQEBAQEBAQEBAQEBJcCc=""               // string
+    +planId: "aL8rSpzb_0-0IGcHql4P0ZcAG3_B"                         // string
+    +bucketId: "09AEzJXp0E6zY5LEE2Wsv5cAOdQd"                       // string
+    +title: "Task Title"                                            // string
+    +orderHint: "8585037232077788756Pe"                             // string
+    +assigneePriority: ""                                           // string
+    +percentComplete: 100                                           // int
+    +completed: true                                                // bool
+    +startDateTime: Carbon                                          // Carbon\Carbon|null
+    +createdDateTime: Carbon                                        // Carbon\Carbon
+    +dueDateTime: Carbon                                            // Carbon\Carbon|null
+    +recurrence: null                                               // string|null
+    +hasDescription: true                                           // bool
+    +specifiedCompletionRequirements: "none"                        // string
+    +previewType: "noPreview"                                       // string
+    +completedDateTime: Carbon                                      // Carbon\Carbon|null
+    +completedBy: array                                             // array
+    +referenceCount: 2                                              // int
+    +checklistItemCount: 3                                          // int
+    +activeChecklistItemCount: 2                                    // int
+    +conversationThreadId: "AAQkADk1ZG"                             // string|null
+    +priority: 1                                                    // int
+    +creationSource: null                                           // string|null
+    +id: "EZAPnP4uBkGAMqyd2dneWJcAOGbk"                             // string
+    +createdBy: array                                               // array
+    +appliedCategories: array                                       // array
+    +assignments: array                                             // array
+```
+
 ## 🚧 Testing
 
 Copy your own phpunit.xml-file.
