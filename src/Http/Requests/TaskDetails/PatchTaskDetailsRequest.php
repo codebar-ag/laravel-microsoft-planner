@@ -16,7 +16,8 @@ class PatchTaskDetailsRequest extends Request implements HasBody
     public function __construct(
         public readonly string $taskId,
         public readonly string $etag
-    ) {}
+    ) {
+    }
 
     public function defaultHeaders(): array
     {
@@ -27,6 +28,6 @@ class PatchTaskDetailsRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return 'planner/tasks/' . $this->taskId . '/details';
+        return 'planner/tasks/'.$this->taskId.'/details';
     }
 }

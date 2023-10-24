@@ -4,7 +4,6 @@ namespace CodebarAg\LaravelMicrosoftPlanner;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CodebarAg\LaravelMicrosoftPlanner\Commands\LaravelMicrosoftPlannerCommand;
 
 class LaravelMicrosoftPlannerServiceProvider extends PackageServiceProvider
 {

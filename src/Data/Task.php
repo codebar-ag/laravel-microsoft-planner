@@ -4,7 +4,6 @@ namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Saloon\Http\Response;
 use Spatie\LaravelData\Data;
 
 class Task extends Data
@@ -18,26 +17,27 @@ class Task extends Data
         public string $assigneePriority,
         public int $percentComplete,
         public bool $completed,
-        public null|Carbon $startDateTime,
+        public ?Carbon $startDateTime,
         public Carbon $createdDateTime,
-        public null|Carbon $dueDateTime,
-        public null|string $recurrence,
+        public ?Carbon $dueDateTime,
+        public ?string $recurrence,
         public bool $hasDescription,
         public string $specifiedCompletionRequirements,
         public string $previewType,
-        public null|Carbon $completedDateTime,
+        public ?Carbon $completedDateTime,
         public mixed $completedBy,
         public int $referenceCount,
         public int $checklistItemCount,
         public int $activeChecklistItemCount,
-        public null|string $conversationThreadId,
+        public ?string $conversationThreadId,
         public int $priority,
-        public null|string $creationSource,
+        public ?string $creationSource,
         public string $id,
         public array $createdBy,
         public array $appliedCategories,
         public array $assignments,
-    ) {}
+    ) {
+    }
 
     public static function fromData(array $data): self
     {

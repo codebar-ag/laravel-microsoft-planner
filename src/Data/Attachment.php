@@ -13,5 +13,6 @@ class Attachment extends Data
         public string $url,
         public string $lastModifiedDateTime,
         public string $lastModifiedByUserId,
-    ) {}
+    ) {
+    }
 }

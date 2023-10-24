@@ -5,7 +5,6 @@ namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\DataCollection;
 
 class TaskDetails extends Data
 {

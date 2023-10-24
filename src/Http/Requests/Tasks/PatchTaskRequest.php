@@ -2,11 +2,9 @@
 
 namespace CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks;
 
-use CodebarAg\LaravelMicrosoftPlanner\Data\TaskDetails;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
 class PatchTaskRequest extends Request implements HasBody
@@ -18,7 +16,8 @@ class PatchTaskRequest extends Request implements HasBody
     public function __construct(
         public readonly string $taskId,
         public readonly string $etag
-    ) {}
+    ) {
+    }
 
     public function defaultHeaders(): array
     {
@@ -29,6 +28,6 @@ class PatchTaskRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return 'planner/tasks/' . $this->taskId;
+        return 'planner/tasks/'.$this->taskId;
     }
 }

@@ -2,9 +2,7 @@
 
 namespace CodebarAg\LaravelMicrosoftPlanner\Http\Requests\TaskDetails;
 
-use CodebarAg\LaravelMicrosoftPlanner\Data\Task;
 use CodebarAg\LaravelMicrosoftPlanner\Data\TaskDetails;
-use Illuminate\Support\Arr;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -15,11 +13,12 @@ class GetTaskDetailsRequest extends Request
 
     public function __construct(
         public readonly string $taskId
-    ) {}
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
-        return 'planner/tasks/' . $this->taskId . '/details';
+        return 'planner/tasks/'.$this->taskId.'/details';
     }
 
     public function createDtoFromResponse(Response $response): mixed

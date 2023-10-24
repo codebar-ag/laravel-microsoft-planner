@@ -4,7 +4,6 @@ namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 
 use Illuminate\Support\Arr;
 use Spatie\LaravelData\Data;
-use Saloon\Http\Response;
 
 class Checklist extends Data
 {
@@ -14,8 +13,9 @@ class Checklist extends Data
         public string $title,
         public string $orderHint,
         public string $lastModifiedDateTime,
-        public null|string $lastModifiedByUserId,
-    ) {}
+        public ?string $lastModifiedByUserId,
+    ) {
+    }
 
     public static function fromData(string $key, array $data): self
     {

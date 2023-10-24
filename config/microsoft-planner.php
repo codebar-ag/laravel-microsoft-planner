@@ -8,5 +8,5 @@ return [
         'client_secret' => env('MICROSOFT_PLANNER_CLIENT_SECRET'),
         'tenant_id' => env('MICROSOFT_PLANNER_TENANT_ID'),
         'redirect_uri' => env('MICROSOFT_PLANNER_REDIRECT_URI'),
-    ]
+    ],
 ];

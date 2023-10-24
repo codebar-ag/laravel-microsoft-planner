@@ -14,11 +14,12 @@ class GetBucketTasksRequest extends Request
 
     public function __construct(
         public readonly string $bucketId
-    ) {}
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
-        return 'planner/buckets/' . $this->bucketId . '/tasks';
+        return 'planner/buckets/'.$this->bucketId.'/tasks';
     }
 
     public function createDtoFromResponse(Response $response): mixed
