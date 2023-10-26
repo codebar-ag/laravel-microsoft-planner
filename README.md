@@ -53,10 +53,9 @@ This is the contents of the published config file:
 
 return [
     'auth' => [
-        'client_id' => env('MICROSOFT_PLANNER_CLIENT_ID'),
-        'client_secret' => env('MICROSOFT_PLANNER_CLIENT_SECRET'),
-        'tenant_id' => env('MICROSOFT_PLANNER_TENANT_ID'),
-        'redirect_uri' => env('MICROSOFT_PLANNER_REDIRECT_URI'),
+        'client_id' => env('LARAVEL_MICROSOFT_PLANNER_CLIENT_ID'),
+        'client_secret' => env('LARAVEL_MICROSOFT_PLANNER_CLIENT_SECRET'),
+        'tenant_id' => env('LARAVEL_MICROSOFT_PLANNER_TENANT_ID'),
     ]
 ];
 ```
