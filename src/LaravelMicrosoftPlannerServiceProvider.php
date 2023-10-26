@@ -16,6 +16,6 @@ class LaravelMicrosoftPlannerServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-microsoft-planner')
-            ->hasConfigFile();
+            ->hasConfigFile('laravel-microsoft-planner');
     }
 }
