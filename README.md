@@ -157,7 +157,7 @@ CodebarAg\LaravelMicrosoftPlanner\Data\Task {
     +startDateTime: Carbon                                          // Carbon\Carbon|null
     +createdDateTime: Carbon                                        // Carbon\Carbon
     +dueDateTime: Carbon                                            // Carbon\Carbon|null
-    +recurrence: null                                               // string|null
+    +recurrence: null                                               // array|null
     +hasDescription: true                                           // bool
     +specifiedCompletionRequirements: "none"                        // string
     +previewType: "noPreview"                                       // string
