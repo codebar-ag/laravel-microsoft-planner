@@ -20,7 +20,7 @@ class Task extends Data
         public ?Carbon $startDateTime,
         public Carbon $createdDateTime,
         public ?Carbon $dueDateTime,
-        public ?string $recurrence,
+        public ?array $recurrence,
         public bool $hasDescription,
         public string $specifiedCompletionRequirements,
         public string $previewType,
