@@ -73,22 +73,32 @@ use CodebarAg\LaravelMicrosoftPlanner\Http\Requests\Tasks\PatchTaskDetialsReques
 $connector = new MicrosoftPlannerConnector();
 $authenticator = $connector->getAccessToken();
 $connector->authenticate($authenticator);
+```
 
-
+```php
 // Get all tasks from a bucket
+
 $tasksResponse = $connector->send(new GetBucketTasksRequest(bucketId: 'bucket-id'));
 $tasks = $tasksResponse->dto();
+```
 
-
+```php
 // Get a single task
+
 $taskResponse = $connector->send(new GetTaskRequest(taskId: 'task-id'));
 $task = $taskResponse->dto();
+```
 
+```php
 // Get a tasks details
+
 $taskDetailsResponse = $connector->send(new GetTaskDetailsRequest(taskId: 'task-id'));
 $taskDetails = $taskDetailsResponse->dto();
+```
 
+```php
 // Update a task
+
 $updateTaskRequest = new PatchTaskRequest(taskId: 'task-id', etag: $task->eTag);
 $updateTaskRequest->body()->add('somedetail', 'somevalue');
 
@@ -97,8 +107,11 @@ $updateTaskResponse = $connector->send($updateTaskRequest);
 if ($updatedTask->successful()) {
     // Do something
 }
+```
 
+```php
 // Update a tasks details
+
 $updateTaskDetailsRequest = new PatchTaskDetialsRequest(taskId: 'task-id', etag: $taskDetails->eTag);
 $updateTaskDetailsRequest->body()->add('somedetail', 'somevalue');
 
@@ -120,12 +133,16 @@ CodebarAg\LaravelMicrosoftPlanner\Data\Checklist {
     +lastModifiedDateTime: "2021-08-31T13:00:00Z"                   // string
     +lastModifiedByUserId: "1234456"                                // string|null
 }
+```
 
+```php
 CodebarAg\LaravelMicrosoftPlanner\Data\Note {
     +contentType: 'html'                                            // string
     +content: '<p>Some content</p>'                                 // string
 }
+```
 
+```php
 CodebarAg\LaravelMicrosoftPlanner\Data\Reference {
     +alias: "test.pdf"                                              // string
     +url: "https://something.here/in-this-file/test.pdf"            // string
@@ -134,7 +151,9 @@ CodebarAg\LaravelMicrosoftPlanner\Data\Reference {
     +lastModifiedDateTime: "2021-08-31T13:00:00Z"                   // string
     +lastModifiedByUserId: "1234456"                                // string
 }
+```
 
+```php
 CodebarAg\LaravelMicrosoftPlanner\Data\TaskDetails {
     +eTag: "W/"1238934jbdf89bfdkkjbr34g98hh98vhhcc=""               // string
     +description: "Some Description"                                // string
@@ -144,7 +163,9 @@ CodebarAg\LaravelMicrosoftPlanner\Data\TaskDetails {
     +references: Illuminate\Support\Collection                      // Collection
     +checklist: Illuminate\Support\Collection                       // Collection
 }
+```
 
+```php
 CodebarAg\LaravelMicrosoftPlanner\Data\Task {
     +eTag: "W/"JzEtVGFzsdfsdEBAQEBAQEBAQEBAQEBJcCc=""               // string
     +planId: "aL8rSpzb_0-0IGcHql4P0ZcAG3_B"                         // string
