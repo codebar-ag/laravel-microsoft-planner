@@ -13,7 +13,7 @@ class TaskDetails extends Data
         public string $description,
         public string $previewType,
         public string $id,
-        public Note $notes,
+        public ?Note $notes,
         public Collection $references,
         public Collection $checklist,
     ) {
@@ -36,7 +36,7 @@ class TaskDetails extends Data
             description: Arr::get($data, 'description'),
             previewType: Arr::get($data, 'previewType'),
             id: Arr::get($data, 'id'),
-            notes: Note::fromData(Arr::get($data, 'notes')),
+            notes: Arr::has($data, 'notes') ? Note::fromData(Arr::get($data, 'notes')) : null,
             references: $references,
             checklist: $checklist
         );
