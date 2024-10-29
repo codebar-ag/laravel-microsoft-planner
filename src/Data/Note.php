@@ -10,8 +10,7 @@ class Note extends Data
     public function __construct(
         public string $contentType,
         public string $content,
-    ) {
-    }
+    ) {}
 
     public static function fromData(array $data): self
     {

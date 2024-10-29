@@ -14,8 +14,7 @@ class GetBucketTasksRequest extends Request
 
     public function __construct(
         public readonly string $bucketId
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

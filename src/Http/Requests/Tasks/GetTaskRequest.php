@@ -13,8 +13,7 @@ class GetTaskRequest extends Request
 
     public function __construct(
         public readonly string $taskId
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {
