@@ -16,8 +16,7 @@ class PatchTaskRequest extends Request implements HasBody
     public function __construct(
         public readonly string $taskId,
         public readonly string $etag
-    ) {
-    }
+    ) {}
 
     public function defaultHeaders(): array
     {

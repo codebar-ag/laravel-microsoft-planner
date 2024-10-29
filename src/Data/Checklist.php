@@ -14,8 +14,7 @@ class Checklist extends Data
         public string $orderHint,
         public string $lastModifiedDateTime,
         public ?string $lastModifiedByUserId,
-    ) {
-    }
+    ) {}
 
     public static function fromData(string $key, array $data): self
     {
