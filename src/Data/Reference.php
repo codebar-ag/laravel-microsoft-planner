@@ -14,8 +14,7 @@ class Reference extends Data
         public string $previewPriority,
         public string $lastModifiedDateTime,
         public string $lastModifiedByUserId,
-    ) {
-    }
+    ) {}
 
     public static function fromData(string $key, array $data): self
     {

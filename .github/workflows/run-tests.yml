@@ -11,10 +11,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
+      max-parallel: 1
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
-        php: [ 8.2, 8.3 ]
-        laravel: [ 10.* ]
+        os: [ ubuntu-latest ]
+        php: [ 8.2, 8.3, 8.4 ]
+        laravel: [ 12.* ]
         stability: [ prefer-lowest, prefer-stable ]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -43,8 +44,12 @@ jobs:
       - name: Execute tests
         run: cp phpunit.xml.dist phpunit.xml
 
-      - name: Migrate Config
-        run: vendor/bin/pest --migrate-configuration
-
       - name: Execute tests
         run: vendor/bin/pest
+
+      - name: Store Log Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Store report artifacts
+          path: ./vendor/orchestra/testbench-core/laravel/storage/logs

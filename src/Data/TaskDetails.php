@@ -16,8 +16,7 @@ class TaskDetails extends Data
         public ?Note $notes,
         public Collection $references,
         public Collection $checklist,
-    ) {
-    }
+    ) {}
 
     public static function fromData(array $data): self
     {
