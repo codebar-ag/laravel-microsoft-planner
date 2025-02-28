@@ -5,6 +5,7 @@ namespace CodebarAg\LaravelMicrosoftPlanner\Data;
 use Illuminate\Support\Arr;
 use Spatie\LaravelData\Data;
 
+/** @phpstan-consistent-constructor */
 class Checklist extends Data
 {
     public function __construct(
