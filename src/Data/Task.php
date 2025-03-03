@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Spatie\LaravelData\Data;
 
+/** @phpstan-consistent-constructor */
 class Task extends Data
 {
     public function __construct(

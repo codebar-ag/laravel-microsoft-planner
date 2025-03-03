@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 
+/** @phpstan-consistent-constructor */
 class TaskDetails extends Data
 {
     public function __construct(
